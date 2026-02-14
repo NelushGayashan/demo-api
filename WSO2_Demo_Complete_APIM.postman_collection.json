@@ -1,0 +1,953 @@
+{
+	"info": {
+		"_postman_id": "wso2-demo-complete-apim",
+		"name": "WSO2 Demo API - Complete (APIM Gateway)",
+		"description": "Complete Postman collection for testing APIs through WSO2 API Manager Gateway with OAuth2 and custom headers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "APIM Gateway Services (WSO2)",
+			"description": "API calls through WSO2 API Manager Gateway with OAuth2 authentication",
+			"item": [
+				{
+					"name": "Health & Info",
+					"item": [
+						{
+							"name": "Health Check",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text",
+										"description": "OAuth2 Bearer Token"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text",
+										"description": "Request tracing ID"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/health",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "health"]
+								},
+								"description": "Health check through WSO2 Gateway"
+							}
+						},
+						{
+							"name": "API Info",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/info",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "info"]
+								},
+								"description": "Get API info through WSO2 Gateway"
+							}
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Get All Products (with filters)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "wso2-gateway-client",
+										"type": "text",
+										"description": "Client identifier"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text",
+										"description": "Request tracing ID"
+									},
+									{
+										"key": "X-API-Version",
+										"value": "1.0",
+										"type": "text",
+										"description": "API version"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products?category=Electronics&brand=Apple&minPrice=1000&maxPrice=5000",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products"],
+									"query": [
+										{
+											"key": "category",
+											"value": "Electronics",
+											"description": "Filter by category"
+										},
+										{
+											"key": "brand",
+											"value": "Apple",
+											"description": "Filter by brand"
+										},
+										{
+											"key": "minPrice",
+											"value": "1000",
+											"description": "Minimum price"
+										},
+										{
+											"key": "maxPrice",
+											"value": "5000",
+											"description": "Maximum price"
+										}
+									]
+								},
+								"description": "Get products with filters through WSO2 Gateway"
+							}
+						},
+						{
+							"name": "Get Product by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/1",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "1"]
+								},
+								"description": "Get product by ID through gateway"
+							}
+						},
+						{
+							"name": "Get Product by SKU",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/sku/APPLE-MBP-001",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "sku", "APPLE-MBP-001"]
+								},
+								"description": "Get product by SKU through gateway"
+							}
+						},
+						{
+							"name": "Get Products by Category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/category/Electronics",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "category", "Electronics"]
+								}
+							}
+						},
+						{
+							"name": "Get Products by Brand",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/brand/Apple",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "brand", "Apple"]
+								}
+							}
+						},
+						{
+							"name": "Get All Categories",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/categories",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "categories"]
+								}
+							}
+						},
+						{
+							"name": "Get All Brands",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/brands",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "brands"]
+								}
+							}
+						},
+						{
+							"name": "Get Low Stock Products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/low-stock?threshold=20",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "low-stock"],
+									"query": [
+										{
+											"key": "threshold",
+											"value": "20"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "wso2-gateway-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"AirPods Pro 2nd Gen\",\n  \"description\": \"Active Noise Cancellation wireless earbuds\",\n  \"price\": 249.99,\n  \"category\": \"Electronics\",\n  \"stock\": 100,\n  \"sku\": \"APPLE-APP-017\",\n  \"brand\": \"Apple\"\n}"
+								},
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products"]
+								}
+							}
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"MacBook Pro 16\\\" - Updated\",\n  \"description\": \"Apple M3 Max, 64GB RAM, 2TB SSD\",\n  \"price\": 4299.99,\n  \"category\": \"Electronics\",\n  \"stock\": 8,\n  \"sku\": \"APPLE-MBP-001\",\n  \"brand\": \"Apple\"\n}"
+								},
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/1",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "1"]
+								}
+							}
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products/17",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products", "17"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get All Users (with filters)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "wso2-gateway-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users?country=USA&status=ACTIVE",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users"],
+									"query": [
+										{
+											"key": "country",
+											"value": "USA"
+										},
+										{
+											"key": "status",
+											"value": "ACTIVE"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get User by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/1",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "1"]
+								}
+							}
+						},
+						{
+							"name": "Get User by Username",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/username/john.doe",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "username", "john.doe"]
+								}
+							}
+						},
+						{
+							"name": "Search Users by Name",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/search?name=John",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "search"],
+									"query": [
+										{
+											"key": "name",
+											"value": "John"
+										}
+									]
+								}
+							}
+						},
+						{
+							"name": "Get Users by Country",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/country/USA",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "country", "USA"]
+								}
+							}
+						},
+						{
+							"name": "Get Users by Status",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/status/ACTIVE",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "status", "ACTIVE"]
+								}
+							}
+						},
+						{
+							"name": "Get All Countries",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/countries",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "countries"]
+								}
+							}
+						},
+						{
+							"name": "Create User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "wso2-gateway-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"sarah.connor\",\n  \"email\": \"sarah.connor@example.com\",\n  \"fullName\": \"Sarah Connor\",\n  \"phone\": \"+1-555-0200\",\n  \"address\": \"789 Tech Blvd\",\n  \"city\": \"Los Angeles\",\n  \"country\": \"USA\",\n  \"status\": \"ACTIVE\"\n}"
+								},
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users"]
+								}
+							}
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"john.doe\",\n  \"email\": \"john.doe.v2@example.com\",\n  \"fullName\": \"John Doe III\",\n  \"phone\": \"+1-555-0180\",\n  \"address\": \"123 Main St Apt 5B\",\n  \"city\": \"New York\",\n  \"country\": \"USA\",\n  \"status\": \"ACTIVE\"\n}"
+								},
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/1",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "1"]
+								}
+							}
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/users/10",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "users", "10"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Get All Orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders"]
+								}
+							}
+						},
+						{
+							"name": "Get Order by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/1",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "1"]
+								}
+							}
+						},
+						{
+							"name": "Get Order by Order Number",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/number/ORD-2024-001",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "number", "ORD-2024-001"]
+								}
+							}
+						},
+						{
+							"name": "Get Orders by User ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/user/1",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "user", "1"]
+								}
+							}
+						},
+						{
+							"name": "Get Orders by Status",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/status/DELIVERED",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "status", "DELIVERED"]
+								}
+							}
+						},
+						{
+							"name": "Get All Order Statuses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/statuses",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "statuses"]
+								}
+							}
+						},
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "wso2-gateway-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"orderNumber\": \"ORD-2024-010\",\n  \"userId\": 2,\n  \"totalAmount\": 2599.98,\n  \"status\": \"PENDING\",\n  \"paymentMethod\": \"PAYPAL\",\n  \"shippingAddress\": \"456 Oak Ave, Los Angeles, USA\"\n}"
+								},
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders"]
+								}
+							}
+						},
+						{
+							"name": "Update Order",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"orderNumber\": \"ORD-2024-010\",\n  \"userId\": 2,\n  \"totalAmount\": 2599.98,\n  \"status\": \"PROCESSING\",\n  \"paymentMethod\": \"PAYPAL\",\n  \"shippingAddress\": \"456 Oak Ave, Los Angeles, USA\"\n}"
+								},
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/10",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "10"]
+								}
+							}
+						},
+						{
+							"name": "Delete Order",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/orders/10",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "orders", "10"]
+								}
+							}
+						}
+					]
+				},
+				{
+					"name": "Test Error Scenarios",
+					"item": [
+						{
+							"name": "Test Missing Token (401)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products"]
+								},
+								"description": "Should return 401 Unauthorized"
+							}
+						},
+						{
+							"name": "Test Invalid Token (401)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer invalid_token_12345",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{gateway_url}}/apis/wso2apimdemoapi/1.0.0/api/v1/products",
+									"host": ["{{gateway_url}}"],
+									"path": ["apis", "wso2apimdemoapi", "1.0.0", "api", "v1", "products"]
+								},
+								"description": "Should return 401 Unauthorized"
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "gateway_url",
+			"value": "https://localhost:9443",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "YOUR_ACCESS_TOKEN_HERE",
+			"type": "string"
+		}
+	]
+}

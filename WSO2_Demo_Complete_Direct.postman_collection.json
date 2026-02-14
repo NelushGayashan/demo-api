@@ -1,0 +1,803 @@
+{
+	"info": {
+		"_postman_id": "wso2-demo-complete-direct",
+		"name": "WSO2 Demo API - Complete (Direct Services)",
+		"description": "Complete Postman collection for testing Spring Boot API directly with headers and query parameters",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Direct Services (Spring Boot)",
+			"description": "Direct API calls to Spring Boot backend without WSO2 Gateway",
+			"item": [
+				{
+					"name": "Health & Info",
+					"item": [
+						{
+							"name": "Health Check",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text",
+										"description": "Unique request ID for tracing"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/health",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "health"]
+								},
+								"description": "Check if the API is running and healthy"
+							}
+						},
+						{
+							"name": "API Info",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/info",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "info"]
+								},
+								"description": "Get API information and available endpoints"
+							}
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Get All Products (with filters)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Client-ID",
+										"value": "postman-client",
+										"type": "text",
+										"description": "Client identifier"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text",
+										"description": "Request tracing ID"
+									},
+									{
+										"key": "X-API-Version",
+										"value": "1.0",
+										"type": "text",
+										"description": "API version"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products?category=Electronics&brand=Apple&minPrice=1000&maxPrice=5000&search=",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products"],
+									"query": [
+										{
+											"key": "category",
+											"value": "Electronics",
+											"description": "Filter by category"
+										},
+										{
+											"key": "brand",
+											"value": "Apple",
+											"description": "Filter by brand"
+										},
+										{
+											"key": "minPrice",
+											"value": "1000",
+											"description": "Minimum price"
+										},
+										{
+											"key": "maxPrice",
+											"value": "5000",
+											"description": "Maximum price"
+										},
+										{
+											"key": "search",
+											"value": "",
+											"description": "Search in product name",
+											"disabled": true
+										}
+									]
+								},
+								"description": "Get all products with optional filters: category, brand, price range, search"
+							}
+						},
+						{
+							"name": "Get Product by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/1",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "1"]
+								},
+								"description": "Get product by ID"
+							}
+						},
+						{
+							"name": "Get Product by SKU",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/sku/APPLE-MBP-001",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "sku", "APPLE-MBP-001"]
+								},
+								"description": "Get product by SKU code"
+							}
+						},
+						{
+							"name": "Get Products by Category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/category/Electronics",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "category", "Electronics"]
+								},
+								"description": "Get all products in a category"
+							}
+						},
+						{
+							"name": "Get Products by Brand",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/brand/Apple",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "brand", "Apple"]
+								},
+								"description": "Get all products of a specific brand"
+							}
+						},
+						{
+							"name": "Get All Categories",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/categories",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "categories"]
+								},
+								"description": "Get list of all categories"
+							}
+						},
+						{
+							"name": "Get All Brands",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/brands",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "brands"]
+								},
+								"description": "Get list of all brands"
+							}
+						},
+						{
+							"name": "Get Low Stock Products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/low-stock?threshold=20",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "low-stock"],
+									"query": [
+										{
+											"key": "threshold",
+											"value": "20",
+											"description": "Stock threshold (default: 10)"
+										}
+									]
+								},
+								"description": "Get products with stock below threshold"
+							}
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "postman-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"iPad Pro 12.9\",\n  \"description\": \"Latest iPad Pro with M2 chip\",\n  \"price\": 1099.99,\n  \"category\": \"Electronics\",\n  \"stock\": 25,\n  \"sku\": \"APPLE-IPP-016\",\n  \"brand\": \"Apple\"\n}"
+								},
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products"]
+								},
+								"description": "Create a new product"
+							}
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"MacBook Pro 16\\\" M3 Max\",\n  \"description\": \"Updated - Apple M3 Max, 32GB RAM, 1TB SSD\",\n  \"price\": 3699.99,\n  \"category\": \"Electronics\",\n  \"stock\": 12,\n  \"sku\": \"APPLE-MBP-001\",\n  \"brand\": \"Apple\"\n}"
+								},
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/1",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "1"]
+								},
+								"description": "Update existing product"
+							}
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/products/16",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "products", "16"]
+								},
+								"description": "Delete a product"
+							}
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get All Users (with filters)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Client-ID",
+										"value": "postman-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									},
+									{
+										"key": "X-API-Version",
+										"value": "1.0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users?country=USA&city=&status=ACTIVE",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users"],
+									"query": [
+										{
+											"key": "country",
+											"value": "USA",
+											"description": "Filter by country"
+										},
+										{
+											"key": "city",
+											"value": "",
+											"description": "Filter by city",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "ACTIVE",
+											"description": "Filter by status (ACTIVE, INACTIVE)"
+										}
+									]
+								},
+								"description": "Get all users with optional filters"
+							}
+						},
+						{
+							"name": "Get User by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/1",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "1"]
+								},
+								"description": "Get user by ID"
+							}
+						},
+						{
+							"name": "Get User by Username",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/username/john.doe",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "username", "john.doe"]
+								},
+								"description": "Get user by username"
+							}
+						},
+						{
+							"name": "Search Users by Name",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/search?name=John",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "search"],
+									"query": [
+										{
+											"key": "name",
+											"value": "John",
+											"description": "Search by name (case-insensitive)"
+										}
+									]
+								},
+								"description": "Search users by full name"
+							}
+						},
+						{
+							"name": "Get Users by Country",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/country/USA",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "country", "USA"]
+								},
+								"description": "Get all users from a country"
+							}
+						},
+						{
+							"name": "Get Users by Status",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/status/ACTIVE",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "status", "ACTIVE"]
+								},
+								"description": "Get users by status"
+							}
+						},
+						{
+							"name": "Get All Countries",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/countries",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "countries"]
+								},
+								"description": "Get list of all countries"
+							}
+						},
+						{
+							"name": "Create User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "postman-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"mike.johnson\",\n  \"email\": \"mike.johnson@example.com\",\n  \"fullName\": \"Mike Johnson\",\n  \"phone\": \"+1-555-0199\",\n  \"address\": \"456 Market St\",\n  \"city\": \"San Francisco\",\n  \"country\": \"USA\",\n  \"status\": \"ACTIVE\"\n}"
+								},
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users"]
+								},
+								"description": "Create a new user"
+							}
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"john.doe\",\n  \"email\": \"john.doe.updated@example.com\",\n  \"fullName\": \"John Doe Sr.\",\n  \"phone\": \"+1-555-0150\",\n  \"address\": \"123 Main St\",\n  \"city\": \"New York\",\n  \"country\": \"USA\",\n  \"status\": \"ACTIVE\"\n}"
+								},
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/1",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "1"]
+								},
+								"description": "Update existing user"
+							}
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/users/9",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "users", "9"]
+								},
+								"description": "Delete a user"
+							}
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "Get All Orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									},
+									{
+										"key": "X-API-Version",
+										"value": "1.0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders"]
+								},
+								"description": "Get all orders"
+							}
+						},
+						{
+							"name": "Get Order by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/1",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "1"]
+								},
+								"description": "Get order by ID"
+							}
+						},
+						{
+							"name": "Get Order by Order Number",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/number/ORD-2024-001",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "number", "ORD-2024-001"]
+								},
+								"description": "Get order by order number"
+							}
+						},
+						{
+							"name": "Get Orders by User ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/user/1",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "user", "1"]
+								},
+								"description": "Get all orders for a user"
+							}
+						},
+						{
+							"name": "Get Orders by Status",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/status/DELIVERED",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "status", "DELIVERED"]
+								},
+								"description": "Get orders by status (PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED)"
+							}
+						},
+						{
+							"name": "Get All Order Statuses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/statuses",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "statuses"]
+								},
+								"description": "Get list of all order statuses"
+							}
+						},
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Client-ID",
+										"value": "postman-client",
+										"type": "text"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"orderNumber\": \"ORD-2024-009\",\n  \"userId\": 1,\n  \"totalAmount\": 1599.98,\n  \"status\": \"PENDING\",\n  \"paymentMethod\": \"CREDIT_CARD\",\n  \"shippingAddress\": \"123 Main St, New York, USA\"\n}"
+								},
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders"]
+								},
+								"description": "Create a new order"
+							}
+						},
+						{
+							"name": "Update Order",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"orderNumber\": \"ORD-2024-009\",\n  \"userId\": 1,\n  \"totalAmount\": 1599.98,\n  \"status\": \"SHIPPED\",\n  \"paymentMethod\": \"CREDIT_CARD\",\n  \"shippingAddress\": \"123 Main St, New York, USA\"\n}"
+								},
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/9",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "9"]
+								},
+								"description": "Update order status"
+							}
+						},
+						{
+							"name": "Delete Order",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Request-ID",
+										"value": "{{$guid}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{direct_base_url}}/api/v1/orders/9",
+									"host": ["{{direct_base_url}}"],
+									"path": ["api", "v1", "orders", "9"]
+								},
+								"description": "Delete an order"
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "direct_base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
